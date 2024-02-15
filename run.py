@@ -63,6 +63,7 @@ if __name__ == "__main__":
         sales_agent = SalesGPT.from_llm(llm, verbose=verbose, **config)
 
     sales_agent.seed_agent()
+
     print("=" * 10)
     cnt = 0
     while cnt != max_num_turns:

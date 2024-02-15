@@ -296,8 +296,8 @@ class SalesGPT(Chain):
                 # This omits the `agent_scratchpad`, `tools`, and `tool_names` variables because those are generated dynamically
                 # This includes the `intermediate_steps` variable because that is needed
                 input_variables=[
-                    "input",
-                    "intermediate_steps",
+                    "input",  #不太清楚这个input是什么
+                    "intermediate_steps",  #需要实际的数据看一下这个参数是什么样的
                     "salesperson_name",
                     "salesperson_role",
                     "company_name",
@@ -308,6 +308,8 @@ class SalesGPT(Chain):
                     "conversation_history",
                 ],
             )
+
+
             llm_chain = LLMChain(llm=llm, prompt=prompt, verbose=verbose)
 
             tool_names = [tool.name for tool in tools]
@@ -335,7 +337,8 @@ class SalesGPT(Chain):
             sales_conversation_utterance_chain=sales_conversation_utterance_chain,
             sales_agent_executor=sales_agent_executor,
             knowledge_base=knowledge_base,
-            model_name=llm.model,
+            # 由于我更换了ChatLiteLLM模型，因此要把这个多余的参数给注释掉；如果用ChatLiteLLM要加这行代码
+            # model_name=llm.model,
             verbose=verbose,
             **kwargs,
         )
